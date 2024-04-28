@@ -26,12 +26,6 @@ const ContactForm = () => {
     const newContact = { ...values };
     dispatch(addContact(newContact));
     actions.resetForm();
-
-    // event.preventDefault();
-    // const form = event.target;
-    // console.log(event.target);
-    // dispatch(addContact(event.target.elements.text.value));
-    // form.reset();
   };
   return (
     <Formik
@@ -43,13 +37,13 @@ const ContactForm = () => {
         <label>
           Name
           <br />
-          <Field type="text" name="name" />
+          <Field className={css.formfield} type="text" name="name" />
           <ErrorMessage className={css.mes} component="span" name="name" />
         </label>
         <label>
           Number
           <br />
-          <Field type="number" name="number" />
+          <Field className={css.formfield} type="number" name="number" />
           <ErrorMessage className={css.mes} component="span" name="number" />
         </label>
         <button className={css.btn} type="submit">
