@@ -6,7 +6,7 @@ import { selectNameFilter } from "../filters/selectors";
 const contacts_INITIAL_STATES = {
   items: [],
   loading: false,
-  error: null,
+  error: false,
 };
 
 const handlePending = (state) => {

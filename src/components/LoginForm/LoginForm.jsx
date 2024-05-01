@@ -1,19 +1,15 @@
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import css from "./RegistrationForm.module.css";
+import css from "./LoginForm.module.css";
 import {
   MAX_CHAR_VALIDATION,
   MIN_CHAR_PASSWORD_VALIDATION,
   MIN_CHAR_VALIDATION,
 } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/auth/operations";
+import { login } from "../../redux/auth/operations";
 
 const RegistrationFormSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("Name is required!")
-    .max(MAX_CHAR_VALIDATION, `Your user name must be less than 50 characters!`)
-    .min(MIN_CHAR_VALIDATION, "Too Short!"),
   email: Yup.string()
     .required("Email is required!")
     .email("Please, write correct email")
@@ -28,14 +24,14 @@ const RegistrationFormSchema = Yup.object().shape({
     ),
 });
 
-const initialValues = { name: "", email: "", password: "" };
+const initialValues = { email: "", password: "" };
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
     console.log("values:", values);
-    dispatch(register(values));
+    dispatch(login(values));
     actions.resetForm();
   };
   return (
@@ -45,18 +41,7 @@ const RegistrationForm = () => {
       onSubmit={handleSubmit}
     >
       <Form className={css.container}>
-        <h2> Registration </h2>
-        <label>
-          Name
-          <br />
-          <Field
-            className={css.formfield}
-            type="text"
-            name="name"
-            placeholder="Raichel Green"
-          />
-          <ErrorMessage className={css.mes} component="span" name="name" />
-        </label>
+        <h2> Login </h2>
         <label>
           Email
           <br />
@@ -80,11 +65,11 @@ const RegistrationForm = () => {
           <ErrorMessage className={css.mes} component="span" name="password" />
         </label>
         <button className={css.btn} type="submit">
-          Register
+          Log in
         </button>
       </Form>
     </Formik>
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

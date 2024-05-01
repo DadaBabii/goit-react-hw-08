@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { selectIsSignedIn } from "../../redux/auth/selectors";
 import css from "./Navigation.module.css";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
 
 const getClassActive = ({ isActive }) =>
   clsx(css.link, {
@@ -8,21 +10,19 @@ const getClassActive = ({ isActive }) =>
   });
 
 const Navigation = () => {
+  const isSignedIn = useSelector(selectIsSignedIn);
+
   return (
-    <nav className={css.nav}>
+    <>
       <NavLink to="/" className={getClassActive}>
         HomePage
       </NavLink>
-      <NavLink to="/register" className={getClassActive}>
-        RegistrationPage
-      </NavLink>
-      <NavLink to="/login" className={getClassActive}>
-        LoginPage
-      </NavLink>
-      <NavLink to="/contacts" className={getClassActive}>
-        ContactsPage
-      </NavLink>
-    </nav>
+      {isSignedIn && (
+        <NavLink to="/contacts" className={getClassActive}>
+          ContactsPage
+        </NavLink>
+      )}
+    </>
   );
 };
 
